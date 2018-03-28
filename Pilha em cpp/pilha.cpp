@@ -18,7 +18,8 @@ using namespace std;
 typedef struct Pilha{
        int vet[MAX];
        int topo;       
-}Pilha;    
+}Pilha;
+    
 // Cria  pilha 
 Pilha ele_pilha;
 
@@ -43,8 +44,7 @@ struct Pilha p;
 int num,adc;       
 constru_pilha(&p);
 menu();
-
-system("pause");       
+    
 }
 // Função para  exibir o topo.
 void topo(){
@@ -58,7 +58,8 @@ void topo(){
 	if(ele_pilha.topo<=0){
 		cout<<"\n Não há elementos na pilha \n";
 	}else{
-		cout<<" \n Topo da Pilha:"<<aux;
+		cout<<" \n Topo da Pilha: "<<aux;
+		cout<<"\n";
 	}
 		
 }
@@ -123,7 +124,6 @@ void menu(){
     int num,adc,veri_menu;
     int exib;
 	do{
-	system("CLS");
 	cout<<"\n---------MENU---------";
     cout<<"\n----------------------";
 	cout<<"\n|1-Empilhar          |";
@@ -139,14 +139,14 @@ void menu(){
     cout<<"\n";
     system("CLS");
      if(veri_menu==1){
-     	cout<<"\nDigite um valor para empilhar\n ";
+     	cout<<"\nDigite um valor para empilhar: ";
         cin>>adc; 
 		empilhar(&ele_pilha,adc);                             
 	 	}
 	 if(veri_menu==2){
      	 select_desempilhar(&p,num);      
 		  	if(aux2>=0){
-				cout<<"\nValor desempilhado: "<<aux2;
+				cout<<"\nValor desempilhado: \n"<<aux2;
 				cout<<"\n"; 
 			}
 			if(aux2 < 0){
@@ -155,11 +155,12 @@ void menu(){
 	 	}	
 	 if(veri_menu==3){
 		int exib=-1;
-		cout<<" \nEscolha qual elemento deseja Localizar \n";
-		cin>>exib;
+		
 		if(ele_pilha.topo<0){	
 			cout<<"\n Voce ainda não inseriu valores na pilha \n";	
 		}else{
+			cout<<" \nEscolha qual elemento deseja Localizar \n";
+			cin>>exib;
 			exibir_elemento(exib);
 		}
 		}		   	
@@ -182,7 +183,9 @@ void menu(){
 			}			
 		 }
 	  	 
+	  	 
 		 cout<<"\n";
-		 system("pause");	
+		 system("pause");
+		 system("CLS");	
 }while(veri_menu !=7);
 }
