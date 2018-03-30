@@ -1,10 +1,3 @@
-/*
-Progamador: Diego Da Silva Cavoli
-Curso: Análise e Desenvolvimento de sistemas
-Período: 3
-Data: 27/03/2018
-Descrição:
-*/
 
 #include <iostream>
 #include <locale.h> // Biblioteca para poder utilizar setlocale()
