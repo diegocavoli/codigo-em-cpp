@@ -31,7 +31,7 @@ void menu();
 void menu_lista();
 void menu_lista2();
 void remove_lista(lista *p);
-int localizar_elemento(int el);
+int localizar_elemento(lista *p,int el);
 int lista_cheia(lista * p ,int CH);
 int lista_vazia(lista * p ,int VA);
 
@@ -128,7 +128,6 @@ void remove_lista(lista *p){
  
 //funcão para imprimir uma das listas.
 int imprimir_lista(lista* p){
-		cout<<"\n lista 1 \n";
 		for(int i=0;i<ele_lista.topo;i++){
 				cout<<"\n Elemento "<<ele_lista.vet[i]<<" esta na posição "<<i<<". \n";	
 		}
@@ -179,9 +178,9 @@ int lista_vazia(lista* p,int VA){
 }
 
 //funcão para localizar um elemento espesífico.                          
-localizar_elemento(int el){
-	if(!lista_vazia(&ele_lista,1)){
-			bool verif=false;
+localizar_elemento(lista* p,int el){
+	bool verif=false;
+	if(!lista_vazia(&ele_lista,(1))){
 	for(int i=0;i<=MAX;i++){	
 		if(el==ele_lista.vet[i]){
 	 		cout<<"\n Elemento "<<ele_lista.vet[i]<<" esta na posição "<<i<<". \n"; 	
@@ -190,8 +189,8 @@ localizar_elemento(int el){
 	}
 	if(verif==false){
 		cout<<"\n Não possui esse elemento na lista \n";
-	}		
-		}
+	}	
+	}			
 	}
 
                           
@@ -204,21 +203,19 @@ void menu(){
 		cout<<"\n-------------MENU-LISTAS------------";
     	cout<<"\n------------------------------------";
 		cout<<"\n|1-Lista 1          		   |";
-		cout<<"\n|1-Lista 2          		   |";
-    	cout<<"\n|3-Localizar Elementos das listas  |";
-    	cout<<"\n|4-Topo Das Listas                 |";
-    	cout<<"\n|5-Imprimir as Listas              |";
-    	cout<<"\n|6-Limpar as Listas                |";
-    	cout<<"\n|7-Sair                            |";
+		cout<<"\n|2-Lista 2          		   |";
+    	cout<<"\n|3-Imprimir as Listas              |";
+    	cout<<"\n|4-Limpar as Listas                |";
+    	cout<<"\n|5-Sair                            |";
     	cout<<"\n------------------------------------";
 			cout<<"\n Escolha sua opção: ";
             cin>>veri_lista;
             do{
-			if(veri_lista!=1 && veri_lista!=2 && veri_lista!=3 && veri_lista!=4 && veri_lista!=5 && veri_lista!=6 && veri_lista!=7){
+			if(veri_lista!=1 && veri_lista!=2 && veri_lista!=3 && veri_lista!=4 && veri_lista!=5){
 			 		cout<<"\n Opção Invalida , Tente Novamente:";
 				 	cin>>veri_lista;
 				 }
-			 }while(veri_lista!=1 && veri_lista!=2 && veri_lista!=3 && veri_lista!=4 && veri_lista!=5 && veri_lista!=6 && veri_lista!=7);	
+			 }while(veri_lista!=1 && veri_lista!=2 && veri_lista!=3 && veri_lista!=4 && veri_lista!=5);	
 			if(veri_lista==1){
 				menu_lista();									
 			}
@@ -226,18 +223,10 @@ void menu(){
 				menu_lista2();
 			}
 			if(veri_lista==3){
-				
-				
-			}
-			if(veri_lista==4){
-				
-				
-			}
-			if(veri_lista==5){
 				imprimir_TDlista();
 			}
 			
-			if(veri_lista==6){
+			if(veri_lista==4){
 				remove_lista(&ele_lista);
 	  			remove_lista(&ele_lista1);
 				 if(ele_lista.topo<=0){
@@ -246,11 +235,14 @@ void menu(){
 			}
 		cout<<"\n";
 		system("pause");
-}while(veri_lista!=7);	
+}while(veri_lista!=5);
+if(veri_lista==5){
+	exit(1);	
+}
+
 }
 
 void menu_lista(){
-	
 	struct lista p;
     int adc,veri_menu,veri_op,selec,el;
 	do{
@@ -366,7 +358,7 @@ void menu_lista(){
 	 		if(!lista_vazia(&ele_lista,1)){ 
 	 		cout<<"\n Digite o elemento que deseja localizar: ";
 	 		cin>>el;
-			localizar_elemento(el);
+			localizar_elemento(&ele_lista,el);
 			}
 		}		   	
 		if(veri_menu==4){
@@ -512,7 +504,7 @@ void menu_lista2(){
 	 		if(!lista_vazia(&ele_lista1,(1))){ 
 	 		cout<<"\n Digite o elemento que deseja localizar: ";
 	 		cin>>el;
-			localizar_elemento(el);
+			localizar_elemento(&ele_lista1,el);
 			}
 		}		   	
 		if(veri_menu==4){
