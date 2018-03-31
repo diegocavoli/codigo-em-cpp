@@ -259,7 +259,7 @@ localizar_elemento(lista* p,int el){
 	bool verif=false;
 	if(!lista_vazia(1)){
 		if(selec_lista==1){
-			for(int i=0;i<=MAX;i++){	
+			for(int i=0;i<ele_lista.topo;i++){	
 				if(el==ele_lista.vet[i]){
 	 				cout<<"\n Elemento "<<ele_lista.vet[i]<<" esta na posição "<<i<<". \n"; 	
 	 				verif=true;
@@ -268,10 +268,8 @@ localizar_elemento(lista* p,int el){
 	 	 if(verif==false){
 	  		cout<<"\n Não possui esse elemento na lista \n";
 	 	  }	
-	   }
-	 }else if(selec_lista==2){
-		if(selec_lista==1){
-			for(int i=0;i<=MAX;i++){	
+	   }else if(selec_lista==2){
+			for(int i=0;i<ele_lista.topo;i++){	
 			 if(el==ele_lista2.vet[i]){
 	 			cout<<"\n Elemento "<<ele_lista2.vet[i]<<" esta na posição "<<i<<". \n"; 	
 	 			verif=true;
@@ -280,8 +278,9 @@ localizar_elemento(lista* p,int el){
 	 	 if(verif==false){
 	      cout<<"\n Não possui esse elemento na lista \n";
 	     }	
-	   } 	
+	    	
     }		
+	 }
 }
 
                           
@@ -510,11 +509,10 @@ void menu_lista(){
 			 		if(ele_lista.topo>0){
 					cout<<"\n Topo da Lista: "<<ele_lista.vet[0]<<"\n";
 			 		}
-					else if(selec_lista==2){
+					}else if(selec_lista==2){
 			 			if(ele_lista2.topo>0){
 						cout<<"\n Topo da Lista: "<<ele_lista2.vet[0]<<"\n";
-			 			}		
-					}
+			 			}	
 				}
 			}
 		}
@@ -527,14 +525,16 @@ void menu_lista(){
 		
 		if(veri_menu==6){
 			if(!lista_vazia(1)){
-				if(selec_lista==1){
-					remove_lista(&ele_lista);	
-				}else if(selec_lista==2){
-					remove_lista(&ele_lista2);	
-				}
+					if(selec_lista==1){
+					   remove_lista(&ele_lista);	
+					 }else if(selec_lista==2){
+						remove_lista(&ele_lista2);	
+					 }
+					 if(ele_lista.topo<=0){
+				 		lista_vazia(1);		
+					 }
 			}	
 		}
-		
 		 cout<<"\n";
 		 system("pause");
 }while(veri_menu !=7);
