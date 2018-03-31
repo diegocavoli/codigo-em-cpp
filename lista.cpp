@@ -16,21 +16,24 @@ typedef struct lista{
 // Cria  pilha 
 lista ele_lista;
 lista ele_lista1;
+
 //Prototipação das funçoes 
-void listar_IN(lista* p, int eleme,int esc);
-void listar_QL(lista* p, int eleme,int selec,int esc);
-void listar_FI(lista* p, int eleme,int esc);
-void remove_IN(lista* p,int esc);
-void remove_QL(lista* p, int eleme,int esc);
-void remove_FI(lista* p,int esc);
+void listar_IN(lista* p, int eleme);
+void listar_QL(lista* p, int eleme,int selec);
+void listar_FI(lista* p, int eleme);
+void remove_IN(lista* p);
+void remove_QL(lista* p, int eleme);
+void remove_FI(lista* p);
 void constru_lista(lista* p);
 void imprimir_TDlista();
-int imprimir_lista(lista* p,int esc);
+int imprimir_lista(lista* p);
 void menu();
+void menu_lista();
+void menu_lista2();
 void remove_lista(lista *p);
-int localizar_elemento(int el,int esc);
-int lista_cheia(int CH);
-int lista_vazia(int VA);
+int localizar_elemento(int el);
+int lista_cheia(lista * p ,int CH);
+int lista_vazia(lista * p ,int VA);
 
 
 int main(){
@@ -46,117 +49,69 @@ menu();
 }
 
 // Função para  listar o dados no inicio do lista.
-void listar_IN(lista* p, int eleme,int esc){   
-	 
+void listar_IN(lista* p, int eleme){   
 	 	if(p->topo<0){
      		p->topo=0;
     	 }
-    	if(esc==1){
     		for(int i=ele_lista.topo-1;i>=0;i--){
 				ele_lista.vet[i+1]=ele_lista.vet[i];
      		}
      		ele_lista.vet[0]= eleme;
-			p->topo++; 	
-		}else{
-			for(int i=ele_lista1.topo-1;i>=0;i--){
-				ele_lista1.vet[i+1]=ele_lista1.vet[i];
-     		}
-     		ele_lista1.vet[0]= eleme;
-			p->topo++;	
-		}
+			p->topo++; 		
+	
      	
 }
 
 // Função para listar o dados em alguma posição desejada.
-void listar_QL(lista* p, int eleme,int selec,int esc){    
-     if(!lista_cheia(1)){
-     	if(esc==1){
+void listar_QL(lista* p, int eleme,int selec){    
+     if(!lista_cheia(&ele_lista,1)){
      		p->topo++; 
      		for(int i=ele_lista.topo-1;i>=selec;i--){
 				ele_lista.vet[i+1]=ele_lista.vet[i];
      			ele_lista.vet[i]= eleme;
 			}
-		}else if(esc==2){
-		 	p->topo++; 
-     		for(int i=ele_lista1.topo-1;i>=selec;i--){
-				ele_lista1.vet[i+1]=ele_lista1.vet[i];
-     			ele_lista1.vet[i]= eleme;	
-		 	}
+	
 		}
     }
-}
+
 
 // Função para  listar o dados no fim da lista.
-void listar_FI(lista* p, int eleme, int esc){  
+void listar_FI(lista* p, int eleme){  
   	if(p->topo<0){
      	p->topo=0;
     }
     if(p->topo<MAX ){
-    		if(esc==1){
-    			
     		 p->vet[p->topo]= eleme;
-    		 p->topo++;
-		 		
-			}
-			if(esc==2){
-				
-				p->vet[p->topo]= eleme;
-				p->topo++;
-		 			
-			}	
+    		 p->topo++;	
 		 }
 	}
+	
 // Função para remover os dados no inicio da lista.
-void remove_IN(lista* p,int esc){   
-	if(esc==1){
-			cout<<"\n Removido da Lista 1: "<<ele_lista.vet[0];
+void remove_IN(lista* p){   
+		cout<<"\n Removido da Lista 1: "<<ele_lista.vet[0];
 	for(int i=0;i<ele_lista.topo;i++){
 		ele_lista.vet[i]=ele_lista.vet[i+1];
 	}
 	p->topo--;	
-	}
-	if(esc==2){
-		cout<<"\n Removido da Lista 2: "<<ele_lista1.vet[0];
-	for(int i=0;i<ele_lista1.topo;i++){
-		ele_lista1.vet[i]=ele_lista.vet[i+1];
-	}
-	p->topo--;	
-	}
+	
 	
 }
 
 // Função para remover os dados de alguma posição desejada.
-void remove_QL(lista* p,int eleme,int esc){      
-    if(!lista_vazia(1)){
-    	if(esc==1){
+void remove_QL(lista* p,int eleme){      
+    if(!lista_vazia(&ele_lista,1)){
     		cout<<"\n Removido da Lista 1: "<<ele_lista.vet[eleme];
      		for(int i=eleme;i<=ele_lista.topo-1;i++){
 				ele_lista.vet[i]=ele_lista.vet[i+1];
 				p->topo--;
 			}
 		}
-		if(esc==2){
-			cout<<"\n Removido da Lista 2: "<<ele_lista1.vet[eleme];
-     		for(int i=eleme;i<=ele_lista1.topo-1;i++){
-				ele_lista1.vet[i]=ele_lista1.vet[i+1];
-				p->topo--; 
-			}
-    	}
-     	
-	}
-}
+    }
 
 // Função para  remover dados no fim da lista.
-void remove_FI(lista* p,int esc){
-	if(esc==1){
+void remove_FI(lista* p){
 		cout<<"\n Removido da Lista: "<<ele_lista.vet[p->topo-1];      
-    	p->topo--;	
-	}
-	if(esc==2){
-		cout<<"\n Removido da Lista: "<<ele_lista1.vet[p->topo-1];      
-    	p->topo--;	
-	}
-	
+    	p->topo--;
 }
 // Função para inicializar os topos  da lista com valor -1. 
 void constru_lista(lista* p){
@@ -172,20 +127,12 @@ void remove_lista(lista *p){
 
  
 //funcão para imprimir uma das listas.
-int imprimir_lista(lista* p,int esc){
-	if(esc==1){
+int imprimir_lista(lista* p){
 		cout<<"\n lista 1 \n";
 		for(int i=0;i<ele_lista.topo;i++){
 				cout<<"\n Elemento "<<ele_lista.vet[i]<<" esta na posição "<<i<<". \n";	
 		}
-	}
-	if(esc==2){
-		cout<<"\n lista 2 \n";
-		for(int i=0;i<ele_lista1.topo;i++){
-				cout<<"\n Elemento "<<ele_lista1.vet[i]<<" esta na posição "<<i<<". \n";	
-		}			 	
-	}	
-}
+}	 		
 
 void imprimir_TDlista(){
 	if(ele_lista.topo<=0){
@@ -207,16 +154,12 @@ void imprimir_TDlista(){
 	}
 }	
 	
-
 //função para identificar se a lista esta cheia ou não.
-int lista_cheia(int CH){
+int lista_cheia(lista* p,int CH){
 	if(ele_lista.topo==MAX ){
-        cout<<"\nPrimeira lista esta cheia \n ";
-        if(ele_lista1.topo==MAX ){
-        	cout<<"\nSegunda lista esta cheia \n ";
-        }
+        cout<<"\n lista esta cheia \n ";
     }
-        if(ele_lista.topo==MAX && ele_lista1.topo==MAX){
+    if(ele_lista.topo==MAX){
         	return 1;
      }else{
      	return 0;
@@ -224,14 +167,11 @@ int lista_cheia(int CH){
 }
 
 //função para identificar se a lista esta vazia ou não.
-int lista_vazia(int VA){
+int lista_vazia(lista* p,int VA){
 	if(ele_lista.topo<=0){
-			cout<<"\n Primeira Lista Vazia \n";	
+			cout<<"\n Lista Vazia \n";	
 	}
-    if(ele_lista1.topo<=0){
-		cout<<"\n Segunda Lista Vazia \n";
-    }
-    if( ele_lista.topo<=0 && ele_lista1.topo<=0){
+    if( ele_lista.topo<=0){
 		return 1;
      }else{
      	return 0;
@@ -240,7 +180,7 @@ int lista_vazia(int VA){
 
 //funcão para localizar um elemento espesífico.                          
 localizar_elemento(int el){
-	if(!lista_vazia(1)){
+	if(!lista_vazia(&ele_lista,1)){
 			bool verif=false;
 	for(int i=0;i<=MAX;i++){	
 		if(el==ele_lista.vet[i]){
@@ -258,19 +198,72 @@ localizar_elemento(int el){
 // Função para Exibir o menu de acessos 
 void menu(){
 	struct lista p;
-    int adc,veri_menu,veri_op,selec,el,esc;
+    int adc,veri_lista,veri_op,selec,el;
+	do{
+		system("CLS");
+		cout<<"\n-------------MENU-LISTAS------------";
+    	cout<<"\n------------------------------------";
+		cout<<"\n|1-Lista 1          		   |";
+		cout<<"\n|1-Lista 2          		   |";
+    	cout<<"\n|3-Localizar Elementos das listas  |";
+    	cout<<"\n|4-Topo Das Listas                 |";
+    	cout<<"\n|5-Imprimir as Listas              |";
+    	cout<<"\n|6-Limpar as Listas                |";
+    	cout<<"\n|7-Sair                            |";
+    	cout<<"\n------------------------------------";
+			cout<<"\n Escolha sua opção: ";
+            cin>>veri_lista;
+            do{
+			if(veri_lista!=1 && veri_lista!=2 && veri_lista!=3 && veri_lista!=4 && veri_lista!=5 && veri_lista!=6 && veri_lista!=7){
+			 		cout<<"\n Opção Invalida , Tente Novamente:";
+				 	cin>>veri_lista;
+				 }
+			 }while(veri_lista!=1 && veri_lista!=2 && veri_lista!=3 && veri_lista!=4 && veri_lista!=5 && veri_lista!=6 && veri_lista!=7);	
+			if(veri_lista==1){
+				menu_lista();									
+			}
+			if(veri_lista==2){
+				menu_lista2();
+			}
+			if(veri_lista==3){
+				
+				
+			}
+			if(veri_lista==4){
+				
+				
+			}
+			if(veri_lista==5){
+				imprimir_TDlista();
+			}
+			
+			if(veri_lista==6){
+				remove_lista(&ele_lista);
+	  			remove_lista(&ele_lista1);
+				 if(ele_lista.topo<=0){
+				 	lista_vazia(&ele_lista,(1));		
+			}
+			}
+		cout<<"\n";
+		system("pause");
+}while(veri_lista!=7);	
+}
+
+void menu_lista(){
+	
+	struct lista p;
+    int adc,veri_menu,veri_op,selec,el;
 	do{
 	system("CLS");
-	cout<<"\n-----------MENU-LISTA----------";
+	cout<<"\n-----------MENU-LISTA-1--------";
     cout<<"\n-------------------------------";
 	cout<<"\n|1-Adicionar a lista          |";
     cout<<"\n|2-Remover da lista           |";
     cout<<"\n|3-Localizar Elemento         |";
     cout<<"\n|4-Topo Da Lista              |";
     cout<<"\n|5-Imprimir Lista             |";
-    cout<<"\n|6-Imprimir Todas As Listas   |";
-    cout<<"\n|7-Limpar Lista               |";
-    cout<<"\n|8-Sair                       |";
+    cout<<"\n|6-Limpar Lista               |";
+    cout<<"\n|7-Sair                       |";
     cout<<"\n-------------------------------";
     		do{
 				cout<<"\n Escolha sua opção: ";
@@ -279,10 +272,10 @@ void menu(){
 			 		cout<<"\n Opção Invalida , Tente Novamente:";
 				 }
 			 }while(veri_menu!=1 && veri_menu!=2 && veri_menu!=3 && veri_menu!=4 && veri_menu!=5 && veri_menu!=6 && veri_menu!=7 && veri_menu!=8);
-    cout<<"\n";
-    system("CLS");
+    		cout<<"\n";
+    		system("CLS");
      if(veri_menu==1){
-     	if(!lista_cheia(1)){
+     	if(!lista_cheia(&ele_lista,1)){
      		cout<<"\n--------MENU-ADICAO-LISTA-------";
      		cout<<"\n--------------------------------";
      		cout<<"\n| 1-Adicionar Inicio           |";
@@ -300,22 +293,11 @@ void menu(){
 			if(veri_op==1){
 				cout<<"\n Digite o Elemento para Adicão a lista: ";
 				cin>>adc;
-				
-				cout<<"\n Adição lista 1 ou 2: ";
-				cin>>esc;
-					if(ele_lista.topo<MAX && esc==1){
-					listar_IN(&ele_lista,adc,esc);		
-				}	
-					if(ele_lista1.topo<MAX && esc==2){
-					listar_IN(&ele_lista1,adc,esc);	
-					
-				}
-					veri_op=0;
+				listar_IN(&ele_lista,adc);		
 			}
 		}
 		
-}
-				 
+} 
 			if(veri_op==2){
 				bool verific=false;
 				
@@ -333,40 +315,23 @@ void menu(){
 							cout<<"\n Digite o Elemento para Adicão a lista: ";
 							cin>>adc;
 							verific=true;
-							cout<<"\n Adição lista 1 ou 2: ";
-							cin>>esc;
-							if(esc==1){
-								listar_QL(&ele_lista,adc,selec,esc);		
-							}	
-							if(esc==2){
-								listar_QL(&ele_lista1,adc,selec,esc);	
-							}
+							listar_QL(&ele_lista,adc,selec);		
+						
 						}
 					}
 				}
-	veri_op=0;
 }
 		
-			
 			if(veri_op==3){
-				cout<<"\n Adicionar no fim da lista 1 ou 2: ";
-				cin>>esc;
+				
 				cout<<"\n Digite o Elemento para Adicão a lista: ";
 				cin>>adc;
-				if(esc==1){
-					listar_FI(&ele_lista,adc,esc);	
-				}
-				if (esc==2){
-					listar_FI(&ele_lista1,adc,esc);	
-				}
-            	veri_op=0;			
+				listar_FI(&ele_lista,adc);	
+						
 			}  
 		
-	 	
-	 
-	 
 	 if(veri_menu==2){
-	 	if(!lista_vazia(1)){
+	 	if(!lista_vazia(&ele_lista,1)){
 	 		cout<<"\n------MENU-REMOVE-LISTA------";
      		cout<<"\n-----------------------------";
      		cout<<"\n| 1-REMOVE Inicio           |";
@@ -381,85 +346,197 @@ void menu(){
 				 }
 			 }while(veri_op!=1 && veri_op!=2 && veri_op!=3); 
             if(veri_op==1){
-            	cout<<"Remover da lista 1 ou 2: ";
-            	cin>>esc;
-            	if(esc==1){
-            		remove_IN(&ele_lista,esc);
-				}
-				if(esc==2){
-					remove_IN(&ele_lista1,esc);	
-				}
-	veri_op=0;
-}
+            	remove_IN(&ele_lista);
+
+			}
 			if(veri_op==2){
-					cout<<"Remover da lista 1 ou 2: ";
-					cin>>esc;
             		cout<<"\n Digite Uma Posição da lista que Deseja Remover: ";
 					cin>>selec;
-					if(esc==1){
-						remove_QL(&ele_lista , selec , esc);
-					}
-					if(esc==2){
-						remove_QL(&ele_lista1 , selec , esc);
-					}
-		veri_op=0;					
+					remove_QL(&ele_lista , selec);				
 			}
 			
 			if(veri_op==3){
-				cout<<"\n Remover da lista 1 ou 2: ";
-				cin>>esc;
-				if(esc==1){
-					remove_FI(&ele_lista,esc);	
-				}
-				if(esc==2){
-					remove_FI(&ele_lista1,esc);
-				}
-            	
+				remove_FI(&ele_lista);	
 			}
-	 	}
-	 	veri_op=0;
+	 	
+		}
 	}
 
 	 if(veri_menu==3){
-	 		if(!lista_vazia(1)){ 
+	 		if(!lista_vazia(&ele_lista,1)){ 
 	 		cout<<"\n Digite o elemento que deseja localizar: ";
 	 		cin>>el;
 			localizar_elemento(el);
 			}
 		}		   	
 		if(veri_menu==4){
-			if(!lista_vazia(1)){
+			if(!lista_vazia(&ele_lista,1)){
 					if(ele_lista.topo>0){
 					cout<<"\n Topo da Lista 1: "<<ele_lista.vet[0]<<"\n";	
 				}
-				if(ele_lista1.topo>0){
-					cout<<"\n Topo da Lista 2: "<<ele_lista1.vet[0]<<"\n";	
-				}
 			}
 		}
+		
 	  if(veri_menu==5){
-	  		if(!lista_vazia(1)){
-	  			cout<<"\n Imprimir lista 1 ou 2: ";
-				cin>>esc;
-				if(esc==1){
-					imprimir_lista(&ele_lista,esc);
-				} 
-				if(esc==2){
-					imprimir_lista(&ele_lista1,esc);
-				}
-				}
+	  		if(!lista_vazia(&ele_lista,(1))){			
+				imprimir_lista(&ele_lista);	
+			}
 		}
 		if(veri_menu==6){
-			imprimir_TDlista();	
-		}
-	  if(veri_menu==7){
-	  			remove_lista(&ele_lista);
-	  			remove_lista(&ele_lista1);
-				 if(ele_lista.topo<=0){
-				 	lista_vazia(1);
-				 }	
+			if(!lista_vazia(&ele_lista,(1))){
+				remove_lista(&ele_lista);
+			}	
 		}
 		 cout<<"\n";
 		 system("pause");
-}while(veri_menu !=8);
+	}while(veri_menu !=7);
+	if(veri_menu==7){
+		menu();
+	}
+}
+
+void menu_lista2(){
+	
+	struct lista p;
+    int adc,veri_menu,veri_op,selec,el;
+	do{
+	system("CLS");
+	cout<<"\n-----------MENU-LISTA-2--------";
+    cout<<"\n-------------------------------";
+	cout<<"\n|1-Adicionar a lista          |";
+    cout<<"\n|2-Remover da lista           |";
+    cout<<"\n|3-Localizar Elemento         |";
+    cout<<"\n|4-Topo Da Lista              |";
+    cout<<"\n|5-Imprimir Lista             |";
+    cout<<"\n|6-Limpar Lista               |";
+    cout<<"\n|7-Sair                       |";
+    cout<<"\n-------------------------------";
+    		do{
+				cout<<"\n Escolha sua opção: ";
+            	cin>>veri_menu;
+            	if(veri_menu!=1 && veri_menu!=2 && veri_menu!=3 && veri_menu!=4 && veri_menu!=5 && veri_menu!=6 && veri_menu!=7){
+			 		cout<<"\n Opção Invalida , Tente Novamente:";
+				 }
+			 }while(veri_menu!=1 && veri_menu!=2 && veri_menu!=3 && veri_menu!=4 && veri_menu!=5 && veri_menu!=6 && veri_menu!=7);
+    		cout<<"\n";
+    		system("CLS");
+     if(veri_menu==1){
+     	if(!lista_cheia(&ele_lista1,(1))){
+     		cout<<"\n--------MENU-ADICAO-LISTA-------";
+     		cout<<"\n--------------------------------";
+     		cout<<"\n| 1-Adicionar Inicio           |";
+     		cout<<"\n| 2-Adicionar em Alguma Posição|";
+     		cout<<"\n| 3-Adicionar no Fim           |";
+     		cout<<"\n--------------------------------";
+			do{
+				cout<<"\n Escolha sua opção: ";
+            	cin>>veri_op;
+            	if(veri_op!=1 && veri_op!=2 && veri_op!=3){
+			 		cout<<"\n Opção Invalida , Tente Novamente:";
+				 }
+			 }while(veri_op!=1 && veri_op!=2 && veri_op!=3); 
+			 	
+			if(veri_op==1){
+				cout<<"\n Digite o Elemento para Adicão a lista: ";
+				cin>>adc;
+				listar_IN(&ele_lista1,adc);		
+			}
+		}
+		
+} 
+			if(veri_op==2){
+				bool verific=false;
+				
+				if(ele_lista1.topo<=1){
+					cout<<"\n E necessario inserir a lista pelomenos 2 elementos.\n";
+				}else{
+					while(verific==false){
+					
+						cout<<"\n Digite Uma Posição da lista que Deseja Adicionar ,Disponivel de 0 a "<<ele_lista1.topo<<": ";
+						cin>>selec;
+						if(selec>ele_lista1.topo){
+							cout<<"\n Você so podera adicionar da posição 0 ate "<<ele_lista1.topo<<". \n";
+							verific=false;
+						}else{
+							cout<<"\n Digite o Elemento para Adicão a lista: ";
+							cin>>adc;
+							verific=true;
+							listar_QL(&ele_lista1,adc,selec);		
+						
+						}
+					}
+				}
+}
+		
+			if(veri_op==3){
+				
+				cout<<"\n Digite o Elemento para Adicão a lista: ";
+				cin>>adc;
+				listar_FI(&ele_lista1,adc);	
+						
+			}  
+		
+	 if(veri_menu==2){
+	 	if(!lista_vazia(&ele_lista1,(1))){
+	 		cout<<"\n------MENU-REMOVE-LISTA------";
+     		cout<<"\n-----------------------------";
+     		cout<<"\n| 1-REMOVE Inicio           |";
+     		cout<<"\n| 2-REMOVE em Alguma Posição|";
+     		cout<<"\n| 3-REMOVE no Fim           |";
+     		cout<<"\n-----------------------------";
+     		do{
+				cout<<"\n Escolha sua opção: ";
+            	cin>>veri_op;
+            	if(veri_op!=1 && veri_op!=2 && veri_op!=3){
+			 		cout<<"\n Opção Invalida , Tente Novamente:";
+				 }
+			 }while(veri_op!=1 && veri_op!=2 && veri_op!=3); 
+            if(veri_op==1){
+            	remove_IN(&ele_lista1);
+
+			}
+			if(veri_op==2){
+            		cout<<"\n Digite Uma Posição da lista que Deseja Remover: ";
+					cin>>selec;
+					remove_QL(&ele_lista1 , selec);				
+			}
+			
+			if(veri_op==3){
+				remove_FI(&ele_lista1);	
+			}
+	 	
+		}
+	}
+
+	 if(veri_menu==3){
+	 		if(!lista_vazia(&ele_lista1,(1))){ 
+	 		cout<<"\n Digite o elemento que deseja localizar: ";
+	 		cin>>el;
+			localizar_elemento(el);
+			}
+		}		   	
+		if(veri_menu==4){
+			if(!lista_vazia(&ele_lista1,(1))){
+					if(ele_lista1.topo>0){
+					cout<<"\n Topo da Lista 1: "<<ele_lista1.vet[0]<<"\n";	
+				}
+			}
+		}
+		
+	  if(veri_menu==5){
+	  		if(!lista_vazia(&ele_lista1,(1))){			
+				imprimir_lista(&ele_lista1);	
+			}
+		}
+		if(veri_menu==6){
+			if(!lista_vazia(&ele_lista1,(1))){
+				remove_lista(&ele_lista1);
+			}	
+		}
+		 cout<<"\n";
+		 system("pause");
+	}while(veri_menu !=7);
+	if(veri_menu==7){
+		menu();
+	}
 }
