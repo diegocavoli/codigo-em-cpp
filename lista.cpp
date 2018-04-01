@@ -7,13 +7,13 @@
 #include <stdlib.h>
 using namespace std;
 #define MAX 5
-// Estrutura da pilha 
+// Estrutura da Lista 
 typedef struct lista{
        int vet[MAX];
        int topo;       
 }lista;
     
-// Cria  pilha 
+// Cria  Lista 
 lista ele_lista;
 lista ele_lista2;
 
