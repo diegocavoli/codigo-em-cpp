@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
+#include <limits>
+
 using namespace std;
 #define MAX 5
 // Estrutura da Lista 
@@ -33,6 +35,7 @@ void remove_lista(lista *p);
 int localizar_elemento(lista *p,int el);
 int lista_cheia(int CH);
 int lista_vazia(int VA);
+int opcao(int verificador);
 
 //para que o codigo enchergue qual lista que armazenar.
 int selec_lista=0;
@@ -68,9 +71,6 @@ void listar_IN(lista* p, int eleme){
      		ele_lista2.vet[0]= eleme;
 			p->topo++; 			
 		 }
-    		
-	
-     	
 }
 
 // Função para listar o dados em alguma posição desejada.
@@ -254,6 +254,19 @@ int lista_vazia(int VA){
 	
 }
 
+//funçao para verificar se esta sendo digitado somente numero.
+int opcao(int verificador){
+	cout<<"\n Escolha sua opção: ";
+    cin>>verificador;
+	while(cin.fail()) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        cout << "\nDigite Apenas Números!\nEscolha sua opção: ";
+        cin >>verificador;
+    }
+    return verificador;
+}
+
 //funcão para localizar um elemento espesífico.                          
 localizar_elemento(lista* p,int el){
 	bool verif=false;
@@ -288,22 +301,23 @@ localizar_elemento(lista* p,int el){
 void menu(){
 	struct lista p;
     int adc=0,veri_lista=0,veri_op=0,selec=0,el=0;
+    bool sup;
+    
 	do{
 		system("CLS");
-		cout<<"\n-------------MENU-LISTAS------------";
-    	cout<<"\n------------------------------------";
-		cout<<"\n|1-Lista 1          		   |";
-		cout<<"\n|2-Lista 2          		   |";
-    	cout<<"\n|3-Imprimir as Listas              |";
-    	cout<<"\n|4-Limpar as Listas                |";
-    	cout<<"\n|5-Sair                            |";
-    	cout<<"\n------------------------------------";
-			cout<<"\n Escolha sua opção: ";
-            cin>>veri_lista;
+		cout<<"\n  ------------MENU-LISTAS-----------";
+    	cout<<"\n  ----------------------------------";
+		cout<<"\n  |1-Lista 1          		   |";
+		cout<<"\n  |2-Lista 2          		   |";
+    	cout<<"\n  |3-Imprimir as Listas            |";
+    	cout<<"\n  |4-Limpar as Listas              |";
+    	cout<<"\n  |5-Sair                          |";
+    	cout<<"\n  ----------------------------------";
+		
             do{
+            veri_lista=opcao(verificador);
 			if(veri_lista!=1 && veri_lista!=2 && veri_lista!=3 && veri_lista!=4 && veri_lista!=5){
 			 		cout<<"\n Opção Invalida , Tente Novamente:";
-				 	cin>>veri_lista;
 				 }
 			 }while(veri_lista!=1 && veri_lista!=2 && veri_lista!=3 && veri_lista!=4 && veri_lista!=5);	
 			if(veri_lista==1){
@@ -327,6 +341,8 @@ void menu(){
 			}
 		cout<<"\n";
 		system("pause");
+     
+
 }while(veri_lista!=5);
 if(veri_lista==5){
 	exit(1);	
@@ -336,22 +352,21 @@ if(veri_lista==5){
 
 void menu_lista(){
 	struct lista p;
-    int adc,veri_menu,veri_op,selec,el;
+    int adc,veri_menu,veri_op,selec,el,verificador=0;
 	do{
 	system("CLS");
-	cout<<"\n--------SUB-MENU-LISTA---------";
-    cout<<"\n-------------------------------";
-	cout<<"\n|1-Adicionar a lista          |";
-    cout<<"\n|2-Remover da lista           |";
-    cout<<"\n|3-Localizar Elemento         |";
-    cout<<"\n|4-Topo Da Lista              |";
-    cout<<"\n|5-Imprimir Lista             |";
-    cout<<"\n|6-Limpar Lista               |";
-    cout<<"\n|7-Sair                       |";
-    cout<<"\n-------------------------------";
+	cout<<"\n  --------SUB-MENU-LISTA---------";
+    cout<<"\n  -------------------------------";
+	cout<<"\n  |1-Adicionar a lista          |";
+    cout<<"\n  |2-Remover da lista           |";
+    cout<<"\n  |3-Localizar Elemento         |";
+    cout<<"\n  |4-Topo Da Lista              |";
+    cout<<"\n  |5-Imprimir Lista             |";
+    cout<<"\n  |6-Limpar Lista               |";
+    cout<<"\n  |7-Sair                       |";
+    cout<<"\n  -------------------------------";
     		do{
-				cout<<"\n Escolha sua opção: ";
-            	cin>>veri_menu;
+				veri_menu=opcao(verificador);
             	if(veri_menu!=1 && veri_menu!=2 && veri_menu!=3 && veri_menu!=4 && veri_menu!=5 && veri_menu!=6 && veri_menu!=7){
 			 		cout<<"\n Opção Invalida , Tente Novamente:";
 				 }
@@ -360,15 +375,14 @@ void menu_lista(){
     		system("CLS");
      if(veri_menu==1){
      	if(!lista_cheia(1)){
-     		cout<<"\n--------MENU-ADICÃO-LISTA-------";
-     		cout<<"\n--------------------------------";
-     		cout<<"\n| 1-Adicionar Inicio           |";
-     		cout<<"\n| 2-Adicionar em Alguma Posição|";
-     		cout<<"\n| 3-Adicionar no Fim           |";
-     		cout<<"\n--------------------------------";
+     		cout<<"\n  --------MENU-ADICÃO-LISTA-------";
+     		cout<<"\n  --------------------------------";
+     		cout<<"\n  | 1-Adicionar Inicio           |";
+     		cout<<"\n  | 2-Adicionar em Alguma Posição|";
+     		cout<<"\n  | 3-Adicionar no Fim           |";
+     		cout<<"\n  --------------------------------";
 			do{
-				cout<<"\n Escolha sua opção: ";
-            	cin>>veri_op;
+				veri_op=opcao(verificador);
             	if(veri_op!=1 && veri_op!=2 && veri_op!=3){
 			 		cout<<"\n Opção Invalida , Tente Novamente:";
 				 }
@@ -448,15 +462,14 @@ void menu_lista(){
 		
 	 if(veri_menu==2){
 	 	if(!lista_vazia(1)){
-	 		cout<<"\n------MENU-REMOVE-LISTA------";
-     		cout<<"\n-----------------------------";
-     		cout<<"\n| 1-REMOVE no Inicio        |";
-     		cout<<"\n| 2-REMOVE em Alguma Posição|";
-     		cout<<"\n| 3-REMOVE no Fim           |";
-     		cout<<"\n-----------------------------";
+	 		cout<<"\n  ------MENU-REMOVE-LISTA------";
+     		cout<<"\n  -----------------------------";
+     		cout<<"\n  | 1-REMOVE no Inicio        |";
+     		cout<<"\n  | 2-REMOVE em Alguma Posição|";
+     		cout<<"\n  | 3-REMOVE no Fim           |";
+     		cout<<"\n  -----------------------------";
      		do{
-				cout<<"\n Escolha sua opção: ";
-            	cin>>veri_op;
+				veri_op=opcao(verificador);
             	if(veri_op!=1 && veri_op!=2 && veri_op!=3){
 			 		cout<<"\n Opção Invalida , Tente Novamente:";
 				 }
