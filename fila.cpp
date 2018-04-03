@@ -4,6 +4,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <conio.h>
+#include <limits>
 
 using namespace std;
 #define MAX 3
@@ -23,6 +24,9 @@ void menu();
 int imprimir_elemento(int exib);
 void constru_fila(fila* p);
 int localizar_ele(int exib);
+int fila_vazia(int VA);
+int fila_cheia(int CH);
+int opcao(int verificador);
 
 int main(){
 setlocale(LC_ALL,"PORTUGUESE"); //aceitar caracteres especiais
@@ -34,9 +38,6 @@ menu();
 
 //Função para enfileirar os elementos.
 void enfileirar(fila * p,int i){
-	if(p->fim_fila==MAX ){
-        cout<<"\nA pilha esta cheia \n ";
-     }
      if(p->fim_fila<0){
      	p->fim_fila=0;
 	 }
@@ -88,11 +89,42 @@ int localizar_ele(int exib){
 		cout<<"\n Não possui esse elemento na fila \n";
 	}
 }
+
+int fila_cheia(int CH){
+	if(ele_fila.fim_fila==MAX){
+		cout<<"\n Lista Cheia";
+		return 1;	
+	}else{
+		return 0;
+	}
+}
+int fila_vazia(int VA){
+	if(ele_fila.fim_fila<=0){
+		cout<<"\n Lista vazia";
+		return 1;	
+	}else{
+		return 0;
+	}
+}
+
+//funçao para verificar se esta sendo digitado somente numero.
+int opcao(int verificador){
+	cout<<"\n Escolha sua opção: ";
+    cin>>verificador;
+	while(cin.fail()) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        cout << "\nDigite Apenas Números!\nEscolha sua opção: ";
+        cin >>verificador;
+    }
+    return verificador;
+}
+
 // Função para Exibir o menu de acessos 
 void menu(){
 	struct fila p;
-    int num,adc,veri_menu;
-    int cont,exib;
+    int num=0,adc=0,veri_menu=0,verificador=0;
+    int exib;
 	do{
 		system("CLS");
 	cout<<"\n-----------MENU---------";
@@ -105,21 +137,20 @@ void menu(){
     cout<<"\n|6-Limpar Fila         |";
     cout<<"\n|7-Sair                |";
     cout<<"\n------------------------";
-    cout<<"\n Escolha sua opção: ";
-    cin>>veri_menu;
+    
+    veri_menu=opcao(verificador);
     cout<<"\n";
     	system("CLS");
      if(veri_menu==1){
-     	cout<<"\nDigite um valor para enfileirar: ";
-        cin>>adc; 
-		enfileirar(&ele_fila,adc);  
-		cont++;                           
+     	 if(!fila_cheia(1)){
+     		cout<<"\nDigite um valor para enfileirar: ";
+        	cin>>adc; 
+			enfileirar(&ele_fila,adc);  
+		 }
 	 	}
 	 	
 	 if(veri_menu==2){
-	 		if(ele_fila.fim_fila<=0){
-	 			cout<<"\n fila esta vazia \n";
-			 }else{
+		if(!fila_vazia(1)){
 			 	if(ele_fila.fim_fila>0){
 			 	cout<<"\nElemento saiu da fila: "<<ele_fila.vet[0]<<"\n";
 			 	}
@@ -128,9 +159,7 @@ void menu(){
 	 	}
 		 	
 	 if(veri_menu==3){
-	 	if(ele_fila.fim_fila<=0){
-	 		cout<<"\n fila esta vazia \n";
-		 }else{
+	 	if(!fila_vazia(1)){
 		 	cout<<" \n Digite o elemento que deseja localizar na fila: ";
 			cin>>exib;
 		 	localizar_ele(exib);
@@ -138,19 +167,15 @@ void menu(){
 		}
 		
 		if(veri_menu==4){
-			if(ele_fila.fim_fila<=0){
-				cout<<"\n Fila esta vazia \n";
-			}else{
+			if(!fila_vazia(1)){
 				cout<<"Inicio da Fila: "<<ele_fila.vet[0]<<"\n";
 			}
 			
 		}
 		
 	if(veri_menu==5){
-			if(ele_fila.fim_fila<=0){
-				cout<<" \n Não há elementos nesta fila \n";
-			}else{
-				imprimir_elemento(exib);
+			if(!fila_vazia(1)){
+			  imprimir_elemento(exib);
 			}
 	}
 	
@@ -158,12 +183,12 @@ void menu(){
 	  	for(int i=0;i<MAX;i++){
 	  		desenfileirar(&ele_fila);
 		  }
-		  if(ele_fila.fim_fila<=0){
-		  	cout<<"\n Fila esta vazia \n";
+		  fila_vazia(1);
 		  }
-		 }
+		 
 		 cout<<"\n";
 		 system("pause");
 }while(veri_menu !=7);
 }
+
 
