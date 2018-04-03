@@ -300,7 +300,7 @@ localizar_elemento(lista* p,int el){
 // Função para Exibir o menu de acessos 
 void menu(){
 	struct lista p;
-    int adc=0,veri_lista=0,veri_op=0,selec=0,el=0;
+    int adc=0,veri_lista=0,veri_op=0,selec=0,el=0,verificador=0;
     bool sup;
     
 	do{
