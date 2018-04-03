@@ -5,7 +5,9 @@
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
+#include <limits>
 using namespace std;
+
 #define MAX 3
 // Estrutura da pilha 
 typedef struct Pilha{
@@ -23,6 +25,7 @@ void constru_pilha(Pilha* p);
 int select_desempilhar(Pilha* p, int num);
 int exibir_elemento(int exib);
 int imprimir_elemento(int exib);
+int opcao(int verificador);
 void menu();
 void topo();
 
@@ -110,11 +113,26 @@ int imprimir_elemento(int exib){
 			cout<<" \n Elemento "<<ele_pilha.vet[i]<<" esta na posição "<<i<<". \n";	
 		}		
 	}
-}                                                          
+}       
+
+//funçao para verificar se esta sendo digitado somente numero.
+int opcao(int verificador){
+	cout<<"\n Escolha sua opção: ";
+    cin>>verificador;
+	while(cin.fail()) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        cout << "\nDigite Apenas Números!\nEscolha sua opção: ";
+        cin >>verificador;
+    }
+    return verificador;
+}
+
+                                                   
 // Função para Exibir o menu de acessos 
 void menu(){
 	struct Pilha p;
-    int num,adc,veri_menu;
+    int num=0,adc=0,veri_menu=0,verificador=0;
     int exib;
 	do{
 	cout<<"\n---------MENU---------";
@@ -127,8 +145,7 @@ void menu(){
     cout<<"\n|6-Limpar Pilha      |";
     cout<<"\n|7-Sair              |";
     cout<<"\n----------------------";
-    cout<<"\n Escolha sua opção: ";
-    cin>>veri_menu;
+    veri_menu=opcao(verificador);
     cout<<"\n";
     system("CLS");
      if(veri_menu==1){
